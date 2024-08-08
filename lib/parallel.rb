@@ -337,10 +337,11 @@ module Parallel
       end
     end
 
-    # Number of processors seen by the OS, used for process scheduling
+    # Number of processors seen by the OS or value considering CPU quota if the process is inside a cgroup,
+    # used for process scheduling
     def processor_count
-      require 'etc'
-      @processor_count ||= Integer(ENV['PARALLEL_PROCESSOR_COUNT'] || Etc.nprocessors)
+      require 'concurrent-ruby'
+      @processor_count ||= Integer(ENV['PARALLEL_PROCESSOR_COUNT'] || Concurrent.available_processor_count.to_i)
     end
 
     def worker_number

@@ -16,5 +16,6 @@ Gem::Specification.new name, Parallel::VERSION do |s|
   }
   s.files = `git ls-files lib MIT-LICENSE.txt`.split("\n")
   s.license = "MIT"
+  s.add_runtime_dependency "concurrent-ruby", "~> 1.0", ">= 1.3.1"
   s.required_ruby_version = '>= 2.7'
 end
